@@ -69,10 +69,28 @@ $.CouchApp(function(app){
       }
       return fasle;
    });
+
    app.db.info({
       success: function(doc){
          var size = (doc.disk_size / (1024 * 1024)).toFixed(1);
          $("#disk_used").text(size + " MB");
+      }
+   });
+
+   app.view("stats", {
+      group: true,
+      success: function(doc){
+         for(var i in doc.rows){
+            var row = doc.rows[i];
+            switch(row.key){
+            case "TStore::Tweet":
+               $("#stored_tweets").text(row.value);
+               break;
+            case "TStore::Search::CrawlKeyword":
+               $("#registered_keywords").text(row.value);
+               break;
+            }
+         }
       }
    });
 
