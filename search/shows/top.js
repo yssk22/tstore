@@ -10,10 +10,16 @@ function(doc, req){
    // !json templates.site
    // !json templates.top
 
+   // !json config
+   if( config["local"] ){
+      config = Crayon.extend(config["default"], config["local"]);
+   }
+
    var bindings = {
       assetPath : assetPath(),
       site : {
-         title: "TStore::Search"
+         title: "TStore::Search",
+         config : config
       }
    };
 

@@ -1,29 +1,40 @@
 // tstore script
 App = null;
 $.CouchApp(function(app){
+   var CONFIG = JSON.parse($("#site_config").attr("data"));
+   var USE_EXTERNAL  = CONFIG["use_external"];
+   var PING_RETRY    = CONFIG["external_ping_retry"];
+   var PING_AFTER    = CONFIG["external_ping_after"];
+   var PING_INTERVAL = CONFIG["external_ping_interval"] * 1000;
+
    var ping = 0;
-   var PINGLIMIT = 10;
    function updateCrawlerStatus(){
       app.db.openDoc("ts-search-crawler-status",{
          success: function(doc) {
             var updated = new Date(doc.updated_at);
             var diff = (new Date() - updated) / 60000;
             $("#crawler_last_udated").text(updated.toLocaleString());
-            if( diff >= 10 ){
-               pingExternal();
+            if( diff >= PING_AFTER ){
+               if( ping < PING_RETRY ){
+                  setTimeout("pingExternal()", PING_INTERVAL);
+               }
             }else{
                markSiteStatus("up");
             }
          },
          error: function(status, error, reason){
             markSiteStatus("down");
-            if( ping < PINGLIMIT ){
-               setTimeout("pingExternal()", 5000);
+            if( ping < PING_RETRY ){
+               setTimeout("pingExternal()", PING_INTERVAL);
             }
          }
       });
    }
+
    function pingExternal(){
+      if(USE_EXTERNAL == false){
+         return;
+      }
       ping += 1;
       var uri = app.db.uri + "_ts-search-crawler";
       $.ajax({url : uri, type: "POST", dataType: "json",
@@ -39,6 +50,8 @@ $.CouchApp(function(app){
               }
              });
    }
+   // export pingExtTernal globally for setTimeout
+   window.pingExternal = pingExternal;
 
    function markSiteStatus(up_or_down){
       $("#crawler_last_udated").toggleClass("up", up_or_down == "up");
@@ -62,5 +75,6 @@ $.CouchApp(function(app){
          $("#disk_used").text(size + " MB");
       }
    });
+
    updateCrawlerStatus();
 });

@@ -18,5 +18,7 @@
 <% for(var k in site.scripts){ %>
 <script type="text/javascript" src="<%= site.scripts[k] %>"></script>
 <% } %>
+
+<div id="site_config" style="display:none" data="<%= toJSON(site.config) %>"></div>
 </body>
 </html>

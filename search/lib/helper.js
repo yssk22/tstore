@@ -4,4 +4,3 @@ function extractKeywordFromDocId(docId){
    }
    return null;
 }
-

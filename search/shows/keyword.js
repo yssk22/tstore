@@ -7,14 +7,19 @@ function(doc, req){
 
    // !code lib/helper.js
 
-   // !json couchapp
    // !json templates.site
    // !json templates.keyword
+
+   // !json config
+   if( config["local"] ){
+      config = Crayon.extend(config["default"], config["local"]);
+   }
 
    var bindings = {
       assetPath : assetPath(),
       site : {
          title: "",
+         config: config,
          scripts: [
             assetPath() + "/javascripts/keyword.js"
          ]
