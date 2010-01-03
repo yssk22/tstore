@@ -1,4 +1,3 @@
-// this is a .couchapprc example for  on this directory.
 {
   "env" : {
      "default" : {

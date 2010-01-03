@@ -20,7 +20,7 @@ import logging
 import base64
 import traceback
     
-SEARCH_EP = "http://twitter.com/search.json"
+SEARCH_EP = "http://search.twitter.com/search.json"
 
 DEFAULT_WAIT_INTERVAL = 5
 DEFAULT_MAX_CRAWLERS  = 15
