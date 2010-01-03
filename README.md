@@ -78,3 +78,7 @@ Configure your local.ini file for CouchDB.
     
     [httpd_db_handlers]
     _ts-search-crawler = {couch_httpd_external, handle_external_req, <<"ts-search-crawler">>}
+
+# See demo
+
+Visit http://www.yssk22.info/tstore
