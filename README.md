@@ -81,4 +81,4 @@ Configure your local.ini file for CouchDB.
 
 # See demo
 
-Visit [http://www.yssk22.info/tstore](http://www.yssk22.info/tstore)
+Visit [http://www.yssk22.info/tstore/_design/search/_show/top](http://www.yssk22.info/tstore)
