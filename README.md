@@ -18,7 +18,7 @@ Install following libraries using easy_install
 ## Install CouchApp application on your CouchDB
   
   $ easy_install couchapp
-  $ git clone git@github.com:yssk22/tstore.git
+  $ git clone git://github.com/yssk22/tstore.git
   $ cp search/dot_couchapprc couchapp/.couchapprc
   $ vi search/.couchapprc
   $ export PYTHONPATH={TSTORE_ROOT}/vendor/yssk22-couchapp
