@@ -1,6 +1,8 @@
 // tstore script
 App = null;
 $.CouchApp(function(app){
+   var ping = 0;
+   var PINGLIMIT = 10;
    function updateCrawlerStatus(){
       app.db.openDoc("ts-search-crawler-status",{
          success: function(doc) {
@@ -8,18 +10,21 @@ $.CouchApp(function(app){
             var diff = (new Date() - updated) / 60000;
             $("#crawler_last_udated").text(updated.toLocaleString());
             if( diff >= 1 ){
-               poolExternal();
+               pingExternal();
             }else{
                markSiteStatus("up");
             }
          },
          error: function(status, error, reason){
             markSiteStatus("down");
-            poolExternal();
+            if( ping < PINGLIMIT ){
+               setTimeout("pingExternal()", 5000);
+            }
          }
       });
    }
-   function poolExternal(){
+   function pingExternal(){
+      ping += 1;
       var uri = app.db.uri + "_ts-search-crawler";
       $.ajax({url : uri, type: "POST", dataType: "json",
               complete: function(req){
