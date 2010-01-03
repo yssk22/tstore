@@ -19,9 +19,15 @@ Install following libraries using easy_install
   
   $ easy_install couchapp
   $ git clone git://github.com/yssk22/tstore.git
+  $ cd tstore
+  $ git clone git://github.com/yssk22/crayon.git search/vendor/crayon
+  $ git clone git://github.com/yssk22/couchapp.git vendor/yssk22-couchapp
+  $ chmod 755 ../vendor/yssk22-couchapp/bin/couchapp
+
+  $ cd search
   $ cp search/dot_couchapprc couchapp/.couchapprc
   $ vi search/.couchapprc
-  $ export PYTHONPATH={TSTORE_ROOT}/vendor/yssk22-couchapp
+  $ export PYTHONPATH=../vendor/yssk22-couchapp
   $ ../vendor/yssk22-couchapp/bin/couchapp push 
 
 Note that we use couchapp, not official version but modified version (under vendor dir).
@@ -48,8 +54,8 @@ You need to preprare json-formatted configuration file as follows:
          "password" : "time2relax"
      },
      "threads" : {              
-         "wait_interval"  : 5,  
-         "max_crawlers"   : 1   
+         "wait_interval"  : 300,  
+         "max_crawlers"   : 5
      }  
    }
 
@@ -58,12 +64,14 @@ Save this to HOME/tstore-search.json (or any directory that can be acceessed by 
    $ chmod 600 tstore-search.json
    $ chown couchdb.couchdb tstore-search.json
 
+Note that twitter search API has 
+
 ### configure external API 
 
 Configure your local.ini file for CouchDB.
 
    [external]
-   ts-search-crawler = /opt/local/bin/python TSTORE_ROOT/search/_attachments/jobs/crawler/external.py -f HOME/ts-search-config.json
+   ts-search-crawler = /opt/local/bin/python TSTORE_ROOT/search/_attachments/jobs/crawler/external.py -f HOME/ts-search-config.json 2> /tmp/ts-search-config.log
 
    [httpd_db_handlers]
    _ts-search-crawler = {couch_httpd_external, handle_external_req, <<"ts-search-crawler">>}
