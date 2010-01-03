@@ -5,6 +5,7 @@ $.CouchApp(function(app){
       keyword = decodeURIComponent(RegExp.$1);
       $("form.search input[name='keyword']").val(keyword);
    }
+   // for new.html
    $("form#ts-search").submit(function(e){
       var form = $(this);
       var url    = form.attr("action");
@@ -27,6 +28,24 @@ $.CouchApp(function(app){
       return false;
    });
 
+   // for show.html
+   var setReadMore = function(){
+      var last = $("#timeline li#last");
+      var a = $("#timeline a#more");
+      var url = a.attr("href");
+      a.click(function(e){
+         $.get(url, function(data){
+            last.replaceWith(data);
+            $("#timeline .prettyDate").each(function(){
+               $(this).text(prettyDate($(this).text()));
+            });
+            setReadMore();
+         });
+         e.preventDefault();
+         return false;
+      });
+   };
+
    $(".prettyDate").each(function(){
       $(this).text(prettyDate($(this).text()));
    });
@@ -43,19 +62,6 @@ $.CouchApp(function(app){
       endkey   : JSON.stringify([keyword])
    });
 
-   var setReadMore = function(){
-      var last = $("#timeline li#last");
-      var a = $("#timeline a#more");
-      var url = a.attr("href");
-      a.click(function(e){
-         $.get(url, function(data){
-            last.replaceWith(data);
-            setReadMore();
-         });
-         e.preventDefault();
-         return false;
-      });
-   };
    $("#timeline").load(tl_url + "?" + params, function(){
       if($("#timeline li").length == 0){
          $("#timeline").replaceWith("<p>The search results are being cached on this site. Please wait a few minutes and reload the page.</p>");
@@ -66,4 +72,15 @@ $.CouchApp(function(app){
          setReadMore();
       }
    });
+
+   app.view("keyword_count", {
+      key: ["by_keyword", keyword],
+      success: function(doc){
+         var row = doc.rows[0];
+         if(row){
+            $("#stored_tweets_in_keyword").text(row.value);
+         }
+      }
+   });
+
 });
