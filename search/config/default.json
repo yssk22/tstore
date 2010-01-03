@@ -1,0 +1,6 @@
+{
+   "use_external" : true,
+   "external_ping_after"    : 10,
+   "external_ping_retry"    : 5,
+   "external_ping_interval" : 5
+}
