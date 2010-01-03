@@ -1,0 +1,4 @@
+{
+    "name": "TStore",
+    "description": "A twitter search result backup application build on Apache CouchDB"
+}

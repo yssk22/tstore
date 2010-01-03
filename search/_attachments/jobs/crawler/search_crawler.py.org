@@ -1,0 +1,92 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# 
+# Name        : search_crawler.py
+# Description : Get the search result from twitter.com and push it to CouchDB.
+# Usage       :
+#  search_crawler.py -d couchdb_url -q search_word [-s since_id]
+#
+
+import getopt, sys
+import urllib, urllib2
+import urlparse
+import httplib
+import json
+import datetime
+
+SEARCH_EP = "http://twitter.com/search.json"
+
+class MyTask(threading.Thread) :
+    def run(self) :
+        for i in range(0, 20) :
+            print i
+
+
+
+def usage():
+    sys.stderr.write("search_crawler.py -d couch_db_url -q search_word  -s since_id \n")
+
+def get_bulk_docs_url(dst):
+    path = urlparse.urlparse(dst).path
+    dbinfo = json.loads(urllib2.urlopen(dst).read())
+    if dbinfo.has_key("db_name") == False:
+        sys.stderr.write("Error: Invalid CouchDB URL.\n")
+        usage()
+        sys.exit(2)
+    return urlparse.urljoin(dst, dbinfo["db_name"] + "/_bulk_docs")
+
+
+def push(list, dst):
+    paths = dst.split("/")
+    url = urlparse.urljoin(dst, "./_bulk_docs")
+    print "%s docs is pushed to CouchDB(%s)" % (len(list), dst)
+    request = urllib2.Request(url, json.dumps({"docs": list}))
+    return json.loads(urllib2.urlopen(request).read())
+
+
+def main():
+    print "** check arguments ..."
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], "q:d:hs:")
+    except getopt.GetOptError:
+        usage();
+        sys.exit(2);
+        
+    q        = None
+    since_id = None
+    dst      = None
+    for o, a in opts:
+        if o == "-q":
+            q = a
+        if o == "-d":
+            dst = a
+        if o == "-s":
+            since_id = a
+
+    if q == None:
+        usage();
+        sys.exit(1)
+    if dst == None:
+        usage()
+        sys.exit(1)
+
+    bulk_url = get_bulk_docs_url(dst)
+    params = {'q': q }
+    if since_id != None:
+        params["since_id"] = since_id
+
+    print "** start crawling ..."
+    list = crawl("?" + urllib.urlencode(params), [])
+    #list = build_docs(list)
+    print "** push docs to CouchDB ..."
+    now = datetime.datetime.utcnow()
+    push([{"tweet"      : doc, 
+           "type"       : "TStore::Tweet", 
+           "created_at" : now.strftime("%Y-%m-%d %H:%M:%S +0000"),
+           "updated_at" : now.strftime("%Y-%m-%d %H:%M:%S +0000"),
+           "keyword": q } for doc in list], 
+         bulk_url)
+
+if __name__ == "__main__":
+    main()
+

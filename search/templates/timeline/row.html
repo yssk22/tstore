@@ -1,0 +1,28 @@
+<li class="hentry u-<%= encodeURIComponent(tweet.from_user) %> status" id="status_7320928541">
+  <span class="thumb vcard author">
+    <a href="http://twitter.com/<%= encodeURIComponent(tweet.from_user) %>" class="tweet-url profile-pic url">
+      <img alt="<%= encodeURIComponent(tweet.from_user) %>" 
+           class="photo fn" 
+           src="<%= tweet.profile_image_url %>" width="48" height="48" />
+    </a>
+  </span>
+  <span class="status-body">
+    <strong><a href="http://twitter.com/<%= encodeURIComponent(tweet.from_user) %>" class="tweet-url screen-name" title="<%= tweet.from_user %>"><%= tweet.from_user %></a></strong>
+    <span class="entry-content"><%= tweet.text %></span>
+    <span class="meta entry-meta">
+      <a class="entry-date" rel="bookmark" href="http://twitter.com/<%= encodeURIComponent(tweet.from_user) %>/status/<%= (tweet.id) %>">
+        <span class="published timestamp prettyDate"><%= (new Date(tweet.created_at)).toJSON() %></span>
+      </a>
+    </span>
+    <!--
+    <ul class="actions-hover">
+      <li>
+        <span class="reply">
+          <span class="reply-icon icon"></span>
+          <a href="http://twitter.com/?status=@<%= encodeURIComponent(tweet.from_user) %>%20&amp;in_reply_to_status_id=<%= tweet.id %>&amp;in_reply_to=<%= encodeURIComponent(tweet.from_user) %>" title="Reply to <%= tweet.from_user %>">Reply</a>
+        </span>
+      </li>
+    </ul>
+    -->
+  </span>
+</li>

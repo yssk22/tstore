@@ -1,0 +1,29 @@
+ol.statuses {
+    list-style-image:none;
+    list-style-position:outside;
+    list-style-type:none;
+}
+ol.statuses li {
+    margin-bottom: 10px;
+}
+
+ol.statuses .thumb {
+    display:block;
+    float:left;
+    width: 50px;
+    margin: 0px 10px 0 0px;
+    overflow: hidden;
+}
+
+ol.statuses .thumb img {
+    height: 48px;
+    width: 48px;
+    border-width: 0;
+}
+
+ol.statuses span.status-body {
+    display:block;
+    margin-left:  56px;
+    min-height:   50px;
+    overflow:hidden;
+}

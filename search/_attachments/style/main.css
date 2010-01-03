@@ -1,0 +1,80 @@
+/* add styles here */
+h1 {
+    font-size: 14pt;
+    margin: 0;
+}
+
+h2 {
+    font-size: 12pt;
+    margin: 0;
+}
+
+h3 {
+    font-size: 10pt;
+    margin: 0;
+}
+
+header div.title {
+    float:left;
+}
+
+header div.title p {
+    font-size: 8pt;
+}
+
+header form.search {
+    text-align: right;
+}
+
+footer {
+    clear:both;
+    border-top: 1px solid #cccccc;
+    margin-top: 5px;
+    padding-top: 5px;
+    font-size: 9pt;
+}
+
+footer div.site-status {
+    float: left;
+}
+footer div.site-status span.key{
+    font-weight: bold;
+    margin-left: 3px;
+}
+
+footer div.site-status span.key:after{
+    content: ":"
+}
+footer div.site-status span.value{
+    margin-left: 6px;
+}
+
+footer div.powered-by {
+    text-align: right;
+}
+
+div#main {
+    clear:both;
+    border-top: 1px solid #cccccc;
+    margin-top: 5px;
+    padding-top: 5px;
+}
+
+div#main aside {
+    float: left;
+    width: 200px;
+}
+
+div#main div.timeline{
+    margin-left: 210px;
+}
+
+span.keyword:before{
+    content: "'"
+}
+span.keyword:after{
+    content: "'"
+}
+span.keyword {
+    font-weight: bold;
+}

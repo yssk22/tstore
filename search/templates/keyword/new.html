@@ -1,0 +1,11 @@
+<form id="ts-search" action="<%= assetPath %>/_update/ts-search/ts-search-<%= encodeURIComponent(keyword) %>" method="PUT">
+  <p>
+    The keyword <span class="keyword"><%= keyword %></span> has not been stored on this site.
+    Are you sure to register this keyword?<br/>
+    (see the result on <a href="http://twitter.com/#search?q=<%= encodeURIComponent(keyword) %>">twitter.com</a>)
+  </p>
+  <input type="hidden" name="type" value="TStore::Search::CrawlKeyword"></input>
+  <input type="hidden" name="keyword" value="<%= keyword %>"></input>
+  <button type="submit">Register</button>
+  <button type="button">No Thank You</button>
+</form>

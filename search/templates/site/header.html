@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta harset=utf-8 />
+<title><%= site.title %></title>
+<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<style>
+  article, aside, dialog, figure, footer, header,
+  hgroup, menu, nav, section { display: block; }
+</style>
+<link href="<%= assetPath %>/style/main.css" rel="stylesheet" type="text/css" media="all">
+<link href="<%= assetPath %>/style/statuses.css" rel="stylesheet" type="text/css" media="all">
+<body>
+  <header>
+    <div class="title">
+      <h1>TStore</h1>
+      <p>twitter search store build on CouchDB</p>
+    </div>
+    <form class="search" action="javascript:void(0);" method="GET">
+      <input size="40" type="text" name="keyword" value=""></input>
+      <button type="submit">Search</button>
+    </form>
+  </header>
+  <div id="main">

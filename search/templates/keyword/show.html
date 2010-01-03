@@ -1,0 +1,19 @@
+<aside>
+  <h3>Keyword Info</h3>
+  <dl>
+    <dt>cache task status</dt>
+    <dd><%= doc.crawl_status || "N/A" %></dd>
+    <dt>last cache date</dt>
+    <dd class="prettyDate"><%= doc.crawl_start_at  || "N/A" %></dd>
+    <dt>last completed in<dt>
+    <dd class="prettyTime"><%= doc.crawl_completed_in || "N/A" %></dd>
+  </dl>
+</aside>
+<div class="timeline">
+  <h3>Timeline</h3>
+  <ol id="timeline" class="statuses">
+    <div class="now_loading">
+      Now loading
+    </div>
+  </ul>
+</div>

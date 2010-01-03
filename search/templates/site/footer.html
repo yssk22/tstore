@@ -1,0 +1,22 @@
+</div><!-- div#main -->
+<footer>
+  <div class="site-status">
+    <span class="key">Crawler updated</span><span class="value" id="crawler_last_udated"></span>
+    <span class="key">Disk used</span><span class="value" id="disk_used"></span>
+  </div>
+  <div class="powered-by">
+    <a href="http://github.com/yssk22/tstore/master">TStore</a>
+    powered by <a href="http://couchdb.apache.org/">Apache CouchDB</a>
+  </div>
+</footer>
+<script src="/_utils/script/json2.js"></script>
+<script src="/_utils/script/jquery.js?1.3.1"></script>
+<script src="/_utils/script/jquery.couch.js?0.9.0"></script>
+<script type="text/javascript" src="<%= assetPath %>/vendor/couchapp/jquery.couchapp.js"></script>
+<script type="text/javascript" src="<%= assetPath %>/javascripts/util.js"></script>
+<script type="text/javascript" src="<%= assetPath %>/javascripts/tstore.js"></script>
+<% for(var k in site.scripts){ %>
+<script type="text/javascript" src="<%= site.scripts[k] %>"></script>
+<% } %>
+</body>
+</html>
