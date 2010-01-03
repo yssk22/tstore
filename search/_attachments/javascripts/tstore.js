@@ -9,7 +9,7 @@ $.CouchApp(function(app){
             var updated = new Date(doc.updated_at);
             var diff = (new Date() - updated) / 60000;
             $("#crawler_last_udated").text(updated.toLocaleString());
-            if( diff >= 1 ){
+            if( diff >= 10 ){
                pingExternal();
             }else{
                markSiteStatus("up");
