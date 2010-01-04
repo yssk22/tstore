@@ -36,9 +36,7 @@ $.CouchApp(function(app){
       a.click(function(e){
          $.get(url, function(data){
             last.replaceWith(data);
-            $("#timeline .prettyDate").each(function(){
-               $(this).text(prettyDate($(this).text()));
-            });
+            replacePrettyDate("#timeline");
             setReadMore();
          });
          e.preventDefault();
@@ -46,13 +44,8 @@ $.CouchApp(function(app){
       });
    };
 
-   $(".prettyDate").each(function(){
-      $(this).text(prettyDate($(this).text()));
-   });
-
-   $(".prettyTime").each(function(){
-      $(this).text(prettyTime($(this).text()));
-   });
+   replacePrettyDate();
+   replacePrettyTime();
 
    var tl_url = app.listPath("timeline", "tweets");
    var params = $.param({
@@ -66,9 +59,7 @@ $.CouchApp(function(app){
       if($("#timeline li").length == 0){
          $("#timeline").replaceWith("<p>The search results are being cached on this site. Please wait a few minutes and reload the page.</p>");
       }else{
-         $("#timeline .prettyDate").each(function(){
-            $(this).text(prettyDate($(this).text()));
-         });
+         replacePrettyDate("#timeline");
          setReadMore();
       }
    });

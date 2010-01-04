@@ -1,7 +1,37 @@
+function replacePrettyDate(selector){
+   var e;
+   if(selector){
+      e = $(selector).find(".prettyDate");
+   }else{
+      e = $(".prettyDate");
+   }
+   e.each(function(){
+      $(this).attr("prettyDate", $(this).text());
+      $(this).text(prettyDate($(this).text())).
+         addClass("prettyDated").
+         removeClass("prettyDate");
+   });
+}
+
+function replacePrettyTime(selector){
+   var e;
+   if(selector){
+      e = $(selector).find(".prettyTime");
+   }else{
+      e = $(".prettyTime");
+   }
+   e.each(function(){
+      $(this).attr("prettyTime", $(this).text());
+      $(this).text(prettyTime($(this).text())).
+         addClass("prettyTimed").
+         removeClass("prettyTime");
+   });
+}
+
 function prettyDate(time){
    var date = new Date(time),
-   diff = (((new Date()).getTime() - date.getTime()) / 1000),
-   day_diff = Math.floor(diff / 86400);
+       diff = (((new Date()).getTime() - date.getTime()) / 1000),
+       day_diff = Math.floor(diff / 86400);
 
    // if ( isNaN(day_diff) || day_diff < 0 || day_diff >= 31 ) return;
 
