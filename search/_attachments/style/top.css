@@ -1,0 +1,29 @@
+header div.title {
+    margin-top: 200px;
+    margin-bottom: 10px;
+    float:none;
+    text-align:center;
+
+}
+
+header form.search {
+    text-align: center;
+    margin-left: 40px;
+}
+
+div#main {
+    border-top: none;
+}
+
+footer {
+    border-top: none;
+}
+
+footer div.site-status {
+    display:none;
+}
+
+footer div.powered-by {
+    margin-top: 20px;
+    text-align:center;
+}
